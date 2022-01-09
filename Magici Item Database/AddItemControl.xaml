@@ -3,10 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Magici_Item_Database"
+             xmlns:local="clr-namespace:Magici_Item_Database" xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" Width="400">
     <Grid>
-            
+        <Label x:Name="label" Content="Name" HorizontalAlignment="Left" Margin="10,14,0,0" VerticalAlignment="Top" Height="22"/>
+        <TextBox x:Name="textBox" Height="23" Margin="48,10,10,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top"/>
+        <Label x:Name="label1" Content="Description" HorizontalAlignment="Left" Margin="10,151,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="textBox1" Margin="10,172,10,28" TextWrapping="Wrap" Text="TextBox" AcceptsReturn="True"/>
+        <Label x:Name="label_Copy" Content="Source" HorizontalAlignment="Left" Margin="10,42,0,0" VerticalAlignment="Top" Height="22"/>
+        <TextBox x:Name="textBox_Copy" Height="23" Margin="53,38,93,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top"/>
+        <xctk:IntegerUpDown Watermark="Page #" Height="22" VerticalAlignment="Top" Margin="312,39,0,0" HorizontalAlignment="Left" Width="78" DefaultValue="0" />
     </Grid>
 </UserControl>
