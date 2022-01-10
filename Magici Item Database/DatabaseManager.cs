@@ -9,6 +9,9 @@ namespace Magici_Item_Database
 {
     class DatabaseManager
     {
+        public delegate void Event_ItemAdded(MagicItem newItem);
+        static public event Event_ItemAdded OnItemAdded;
+
         static DatabaseManager _instance = null;
         static SQLiteConnection _db;
 
@@ -38,7 +41,9 @@ namespace Magici_Item_Database
             if (_db == null)
                 throw new Exception("Database NOT opened");
             
-            return _db.Query<MagicItem>("SELECT * FROM MagicItems");
+            var list = _db.Query<MagicItem>("SELECT * FROM MagicItems");
+            list.Sort((x, y) => x.Name.CompareTo(y.Name));
+            return list;
         }
 
         static public bool Add(MagicItem item)
@@ -46,7 +51,12 @@ namespace Magici_Item_Database
             if (_db == null)
                 throw new Exception("Database NOT opened");
 
-            try { _db.Insert(item); }
+            try 
+            { 
+                _db.Insert(item);
+
+                OnItemAdded?.Invoke(item);
+            }
             catch { return false; }
 
             return true;

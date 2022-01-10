@@ -19,13 +19,20 @@ namespace Magici_Item_Database
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : AdonisWindow
     {
         DatabaseManager _db = null;
 
         public MainWindow()
         {
             InitializeComponent();
+
+            DatabaseManager.OnItemAdded += DatabaseManager_OnItemAdded;
+        }
+
+        private void DatabaseManager_OnItemAdded(MagicItem newItem)
+        {
+            items.ItemsSource = DatabaseManager.GetAll();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -90,10 +97,10 @@ namespace Magici_Item_Database
                             #endregion
                         }
                         break;
-                }
-
-                
+                }                
             }
+
+            items.ItemsSource = DatabaseManager.GetAll();
         }
     }
 }

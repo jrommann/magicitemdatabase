@@ -24,5 +24,23 @@ namespace Magici_Item_Database
         {
             InitializeComponent();
         }
+
+        private void addBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var item = new MagicItem();
+            item.Name = nameText.Text;
+            item.Source = sourceText.Text;
+            item.PageNumber = pageNumber.Value.Value;
+            item.Description = descText.Text;
+            DatabaseManager.Add(item);
+
+            if (clearEntriesCheckBox.IsChecked.Value == true)
+            {
+                nameText.Text = string.Empty;
+                sourceText.Text = string.Empty;
+                pageNumber.Value = 0;
+                descText.Text = string.Empty;
+            }
+        }
     }
 }
