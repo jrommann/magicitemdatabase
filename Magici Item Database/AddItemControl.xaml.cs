@@ -60,7 +60,7 @@ namespace Magici_Item_Database
         void AddItem()
         {
             var item = new MagicItem();
-            item.Name = nameText.Text;
+            item.Name = CamelCase(nameText.Text);
             item.Source = sourceText.Text;
             item.PageNumber = pageNumber.Value.Value;
             item.Description = descText.Text;
@@ -69,7 +69,7 @@ namespace Magici_Item_Database
 
         void UpdateItem()
         {            
-            _currentItem.Name = nameText.Text;
+            _currentItem.Name = CamelCase(nameText.Text);
             _currentItem.Source = sourceText.Text;
             _currentItem.PageNumber = pageNumber.Value.Value;
             _currentItem.Description = descText.Text;
@@ -90,6 +90,20 @@ namespace Magici_Item_Database
                 pageNumber.Value = 0;
                 descText.Text = string.Empty;
             }
+        }
+
+        string CamelCase(string name)
+        {
+            var s = name.ToLower().ToCharArray();
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (i == 0)
+                    s[i] = char.ToUpper(s[i]);
+                else if (char.IsWhiteSpace(s[i]) && i + 1 < s.Length && char.IsLetter(s[i + 1]))
+                    s[i+1] = char.ToUpper(s[i+1]);
+            }
+
+            return new string(s);
         }
     }
 }
