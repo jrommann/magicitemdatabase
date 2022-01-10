@@ -20,12 +20,31 @@ namespace Magici_Item_Database
     /// </summary>
     public partial class AddItemControl : UserControl
     {
+        bool _editing = false;
+        MagicItem _currentItem = null;
+
         public AddItemControl()
         {
             InitializeComponent();
         }
 
-        private void addBtn_Click(object sender, RoutedEventArgs e)
+        public void Load(MagicItem item)
+        {
+            if (item == null)
+            {
+                _currentItem = null;
+                _editing = false;
+                addBtn.Content = "Add";
+            }
+            else
+            {
+                _currentItem = item;
+                _editing = true;
+                addBtn.Content = "Update";
+            }
+        }
+
+        void AddItem()
         {
             var item = new MagicItem();
             item.Name = nameText.Text;
@@ -33,6 +52,23 @@ namespace Magici_Item_Database
             item.PageNumber = pageNumber.Value.Value;
             item.Description = descText.Text;
             DatabaseManager.Add(item);
+        }
+
+        void UpdateItem()
+        {            
+            _currentItem.Name = nameText.Text;
+            _currentItem.Source = sourceText.Text;
+            _currentItem.PageNumber = pageNumber.Value.Value;
+            _currentItem.Description = descText.Text;
+            DatabaseManager.Update(_currentItem);
+        }
+
+        private void addBtn_Click(object sender, RoutedEventArgs e)
+        {
+            if (_editing)
+                UpdateItem();
+            else
+                AddItem();
 
             if (clearEntriesCheckBox.IsChecked.Value == true)
             {

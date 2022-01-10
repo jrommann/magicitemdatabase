@@ -9,8 +9,8 @@ namespace Magici_Item_Database
 {
     class DatabaseManager
     {
-        public delegate void Event_ItemAdded(MagicItem newItem);
-        static public event Event_ItemAdded OnItemAdded;
+        public delegate void Event_ItemsChanged(MagicItem specificItem=null);
+        static public event Event_ItemsChanged OnItemsChanged;
 
         static DatabaseManager _instance = null;
         static SQLiteConnection _db;
@@ -55,7 +55,39 @@ namespace Magici_Item_Database
             { 
                 _db.Insert(item);
 
-                OnItemAdded?.Invoke(item);
+                OnItemsChanged?.Invoke(item);
+            }
+            catch { return false; }
+
+            return true;
+        }
+
+        static public bool Delete(MagicItem item)
+        {
+            if (_db == null)
+                throw new Exception("Database NOT opened");
+
+            try
+            {
+                _db.Delete(item);
+
+                OnItemsChanged?.Invoke(item);
+            }
+            catch { return false; }
+
+            return true;
+        }
+
+        static public bool Update(MagicItem item)
+        {
+            if (_db == null)
+                throw new Exception("Database NOT opened");
+
+            try
+            {
+                _db.InsertOrReplace(item);
+
+                OnItemsChanged?.Invoke(item);
             }
             catch { return false; }
 

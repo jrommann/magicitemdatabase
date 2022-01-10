@@ -1,18 +1,9 @@
 ﻿using AdonisUI.Controls;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.IO;
+using System.Text.RegularExpressions;
 
 namespace Magici_Item_Database
 {
@@ -27,10 +18,10 @@ namespace Magici_Item_Database
         {
             InitializeComponent();
 
-            DatabaseManager.OnItemAdded += DatabaseManager_OnItemAdded;
+            DatabaseManager.OnItemsChanged += DatabaseManager_OnItemsChanged;
         }
 
-        private void DatabaseManager_OnItemAdded(MagicItem newItem)
+        private void DatabaseManager_OnItemsChanged(MagicItem specificItem = null)
         {
             items.ItemsSource = DatabaseManager.GetAll();
         }
@@ -102,5 +93,35 @@ namespace Magici_Item_Database
 
             items.ItemsSource = DatabaseManager.GetAll();
         }
+
+        private void perchanceBtn_Click(object sender, RoutedEventArgs e)
+        {
+            StringBuilder sb = new StringBuilder();
+            var list = DatabaseManager.GetAll();
+            foreach (var i in list)
+            {
+                sb.Append("<p><b>")
+                    .Append(i.Name)
+                    .Append("</b></p><p>")
+                    .Append(i.Description)
+                    .Append("</p><p>")
+                    .Append("<b>").Append("Source ").Append("</b><br>").Append(i.Source).Append(" pg").Append(i.PageNumber)
+                    .Append("</p>")
+                    .Append("@");
+            }
+
+            var s = sb.ToString();
+
+            RegexOptions options = RegexOptions.Multiline;
+            Regex regex = new Regex(System.Environment.NewLine, options);
+            s = regex.Replace(s, "<br>");
+            s = s.Replace("@", System.Environment.NewLine);
+
+            var filename = Path.GetTempFileName();
+            File.WriteAllText(filename, s);
+            System.Diagnostics.Process.Start("notepad", filename);
+        }
+
+
     }
 }
