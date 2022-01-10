@@ -17,5 +17,21 @@ namespace Magici_Item_Database
         public string Description { get; set; }
         public string Source { get; set; }
         public int PageNumber { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
+
+        public string ToStringFull()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(Name);
+            sb.AppendLine();
+            sb.AppendLine(Description);
+            sb.AppendLine();
+            sb.Append("Source: ").Append(Source).Append(" pg").Append(PageNumber);
+            return sb.ToString();
+        }
     }
 }

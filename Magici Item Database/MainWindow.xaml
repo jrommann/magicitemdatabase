@@ -19,21 +19,21 @@
                         <ColumnDefinition Width="125*"/>
                         <ColumnDefinition Width="262*"/>
                     </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Column="0">
-                        <Button x:Name="newBtn" Content="new" Width="150" Height="30"/>
-                        <Button x:Name="deleteBtn" Content="Delete" Width="150" Height="30"/>
-                    </StackPanel>
-                    <local:AddItemControl Grid.Column="1" Margin="0,0,0,0" Width="Auto" Grid.ColumnSpan="2"/>
+                    <ListBox x:Name="itemListBox" Grid.Column="0" Margin="0,80,0,0" SelectionChanged="itemListBox_SelectionChanged"/>
+                    <Button x:Name="newBtn" Content="New" Height="30" Grid.Column="0" Margin="10,10,10,0" VerticalAlignment="Top" Click="newBtn_Click"/>
+                    <Button x:Name="deleteBtn" Content="Delete" Height="30" Grid.Column="0" Margin="10,45,10,0" Click="deleteBtn_Click" VerticalAlignment="Top"/>
+                    <local:AddItemControl x:Name="itemEditor" Grid.Column="1" Margin="0,0,0,0" Width="Auto" Grid.ColumnSpan="2"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Export">
+            <TabItem Header="Tools">
                 <Grid>
-                    <WrapPanel Orientation="Horizontal">
+                    <WrapPanel Orientation="Horizontal" Margin="0">
                         <Button x:Name="perchanceBtn" Content="Export for Perchance" Width="150" Height="30" Click="perchanceBtn_Click"/>
+                        <Button x:Name="pickRandomBtn" Content="Random Pick" Width="150" Height="30" Click="pickRandomBtn_Click"/>
                     </WrapPanel>
                 </Grid>
             </TabItem>
-            
+
         </TabControl>
     </Grid>
 </adonisControls:AdonisWindow>

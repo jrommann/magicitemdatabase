@@ -35,12 +35,25 @@ namespace Magici_Item_Database
                 _currentItem = null;
                 _editing = false;
                 addBtn.Content = "Add";
+
+                if (clearEntriesCheckBox.IsChecked.Value == true)
+                {
+                    nameText.Text = string.Empty;
+                    sourceText.Text = string.Empty;
+                    pageNumber.Value = 0;
+                    descText.Text = string.Empty;
+                }
             }
             else
             {
                 _currentItem = item;
                 _editing = true;
                 addBtn.Content = "Update";
+
+                nameText.Text = item.Name;
+                sourceText.Text = item.Source;
+                pageNumber.Value = item.PageNumber;
+                descText.Text = item.Description;
             }
         }
 

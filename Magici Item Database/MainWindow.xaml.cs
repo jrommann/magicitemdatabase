@@ -23,7 +23,7 @@ namespace Magici_Item_Database
 
         private void DatabaseManager_OnItemsChanged(MagicItem specificItem = null)
         {
-            items.ItemsSource = DatabaseManager.GetAll();
+            itemListBox.ItemsSource = DatabaseManager.GetAll();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -91,7 +91,7 @@ namespace Magici_Item_Database
                 }                
             }
 
-            items.ItemsSource = DatabaseManager.GetAll();
+            itemListBox.ItemsSource = DatabaseManager.GetAll();
         }
 
         private void perchanceBtn_Click(object sender, RoutedEventArgs e)
@@ -122,6 +122,29 @@ namespace Magici_Item_Database
             System.Diagnostics.Process.Start("notepad", filename);
         }
 
+        private void newBtn_Click(object sender, RoutedEventArgs e)
+        {
+            itemEditor.Load(null);
+        }
 
+        private void deleteBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var item = itemListBox.SelectedItem as MagicItem;
+            DatabaseManager.Delete(item);
+        }
+
+        private void itemListBox_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
+        {
+            var item = itemListBox.SelectedItem as MagicItem;
+            itemEditor.Load(item);
+        }
+
+        private void pickRandomBtn_Click(object sender, RoutedEventArgs e)
+        {
+            var r = new Random();
+            var list = DatabaseManager.GetAll();
+            if (list.Count > 0)
+                AdonisUI.Controls.MessageBox.Show(list[r.Next(0, list.Count)].ToStringFull(),caption: "Random Item", buttons: AdonisUI.Controls.MessageBoxButton.OK);
+        }
     }
 }
