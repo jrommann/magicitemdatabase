@@ -85,7 +85,7 @@ namespace Magici_Item_Database
 
             try
             {
-                _db.InsertOrReplace(item);
+                _db.Update(item);
 
                 OnItemsChanged?.Invoke(item);
             }

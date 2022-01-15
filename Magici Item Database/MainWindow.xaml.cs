@@ -44,8 +44,8 @@ namespace Magici_Item_Database
                         MessageBoxButtons.Custom("Open Existing", OPEN_BTN),
                         MessageBoxButtons.Custom("Create New", CREATE_BTN),
                     },
-                    IsSoundEnabled = false,
-                };
+                    IsSoundEnabled = false,                    
+                };                
                 #endregion
 
                 AdonisUI.Controls.MessageBox.Show(messageBox);

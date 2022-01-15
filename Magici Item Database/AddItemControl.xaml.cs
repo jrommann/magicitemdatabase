@@ -42,6 +42,7 @@ namespace Magici_Item_Database
                     sourceText.Text = string.Empty;
                     pageNumber.Value = 0;
                     descText.Text = string.Empty;
+                    tagsText.Text = string.Empty;
                 }
             }
             else
@@ -54,6 +55,7 @@ namespace Magici_Item_Database
                 sourceText.Text = item.Source;
                 pageNumber.Value = item.PageNumber;
                 descText.Text = item.Description;
+                tagsText.Text = item.Tags;
             }
         }
 
@@ -64,6 +66,7 @@ namespace Magici_Item_Database
             item.Source = sourceText.Text;
             item.PageNumber = pageNumber.Value.Value;
             item.Description = descText.Text;
+            item.Tags = tagsText.Text;
             DatabaseManager.Add(item);
         }
 
@@ -73,6 +76,7 @@ namespace Magici_Item_Database
             _currentItem.Source = sourceText.Text;
             _currentItem.PageNumber = pageNumber.Value.Value;
             _currentItem.Description = descText.Text;
+            _currentItem.Tags = tagsText.Text;
             DatabaseManager.Update(_currentItem);
         }
 
@@ -89,6 +93,7 @@ namespace Magici_Item_Database
                 sourceText.Text = string.Empty;
                 pageNumber.Value = 0;
                 descText.Text = string.Empty;
+                tagsText.Text = string.Empty;
             }
         }
 

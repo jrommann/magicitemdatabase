@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Magici_Item_Database
-{
+{    
     [Table("MagicItems")]
     public class MagicItem
     {
@@ -17,6 +17,7 @@ namespace Magici_Item_Database
         public string Description { get; set; }
         public string Source { get; set; }
         public int PageNumber { get; set; }
+        public string Tags { get; set; }
 
         public override string ToString()
         {
